@@ -13,6 +13,8 @@ struct Vertex {
 };
 
 class Trie {
+private:
+    int n;
 public:
     vector<Vertex> t;
 
