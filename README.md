@@ -25,6 +25,18 @@ O compilar y ejecutar en un paso:
 make run
 ```
 
+## Tests
+
+```sh
+make test
+```
+
+## Benchmarks
+
+```sh
+make bench
+```
+
 ## Limpiar
 
 ```sh
