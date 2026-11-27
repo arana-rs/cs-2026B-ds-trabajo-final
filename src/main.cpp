@@ -1,4 +1,4 @@
-#include "tree.hpp"
+#include "trie.hpp"
 
 int main() {
     Trie trie;

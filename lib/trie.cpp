@@ -1,4 +1,4 @@
-#include "tree.hpp"
+#include "trie.hpp"
 
 Vertex::Vertex() {
     fill(begin(next), end(next), -1);
