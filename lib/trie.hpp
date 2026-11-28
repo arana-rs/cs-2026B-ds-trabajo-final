@@ -6,28 +6,29 @@ using namespace std;
 const int K = 26;
 
 struct Vertex {
-    int next[K];
-    bool output = false;
+  int next[K];
+  bool output = false;
 
-    Vertex();
+  Vertex();
 };
 
 class Trie {
 private:
-    int n;
+  int n;
+
 public:
-    vector<Vertex> t;
+  vector<Vertex> t;
 
-    Trie();
+  Trie();
 
-    void insert(const string& key);
-    bool contains(const string& key) const;
-    void remove(const string& key);
-    bool isEmpty() const;
-    int size() const;
+  void insert(const string &);
+  bool contains(const string &) const;
+  void remove(const string &);
+  bool isEmpty() const;
+  int size() const;
 
-    string longestPrefixOf(const string& s) const;
-    vector<string> keysWithPrefix(const string& s) const;
-    vector<string> keysThatMatch(const string& s) const;
-    vector<string> keys() const;
+  string longestPrefixOf(const string &) const;
+  vector<string> keysWithPrefix(const string &) const;
+  vector<string> keysThatMatch(const string &) const;
+  vector<string> keys() const;
 };
