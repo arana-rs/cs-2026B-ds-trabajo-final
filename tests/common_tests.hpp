@@ -32,8 +32,10 @@ void common_tests() {
     check(trie.size() == 0, "Trie posee 0 claves");
     check(trie.t.size() == 1, "El árbol solo posee la raiz");
     check(trie.contains("hola") == 0, "Clave no existente");
-
-
+    
+    trie.insert("hola"); 
+    check(trie.longestPrefixOf("holaquetal") == "hola" , "Devuelve hola");
+       
     trie.insert("universidad");
     trie.insert("universo");
     trie.insert("universal");
@@ -103,5 +105,6 @@ void common_tests() {
     check(trie.size() == 0, "Trie posee 0 claves");
     check(trie.t.size() == 1, "El árbol solo posee la raiz");
 
-	cout << "Pruebas comunes superadas\n";
+
+    cout << "Pruebas comunes superadas\n";
 }

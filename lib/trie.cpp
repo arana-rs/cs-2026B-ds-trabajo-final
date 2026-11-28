@@ -16,12 +16,9 @@ void Trie::insert(const string& key){
 			t.emplace_back();
 		}
 		v = t[v].next[c];
-	}&
+	}
 	t[v].output = true;
 	n++;
-}
-vector<string> Trie::keys() const {
-	return keysWithPrefix("");
 }
 bool Trie::contains(const string& key)const{
  int v = 0;
@@ -29,26 +26,24 @@ bool Trie::contains(const string& key)const{
     int pos = c - 'a';
     if(this->t[v].next[pos] == -1) return false;
     v = t[v].next[pos];   
-  
+  } 
   return t[v].output;
 }
 
 bool Trie::isEmpty()const{
-	return n == 0;;
+	return n == 0;
 }
-string longestPrefixOf(const string& s) const{
-
+string Trie::longestPrefixOf(const string& s)const {
+	int v = 0, len = 0;
+	for(int i = 0; i <(int)s.size() ; i++  ){
+	   int pos = s[i] - 'a';
+	   if ( t[v].next[pos] == -1 ) break;
+	   v= t[v].next[pos];
+	   if(t[v].output) len = i + 1;
+	}
+        return s.substr(0 , len);	
+	
 }
-vector<string> Trie::keysWithPrefix(const string& s) const {
-    int v = 0;
-
-}
-
-vector<string> Trie::keysThatMatch(const string& s) const {
-    vector<string> res;
-
-}
-
 void Trie::remove(const string& key){
 	int v = 0;
 	for(char ch : key){
@@ -57,9 +52,9 @@ void Trie::remove(const string& key){
 	 v = t[v].next[c];
 	}
 	if(t[v].output)
-	 t[v].output = false;
-	 n--;
+	t[v].output = false;
+	n--;
 }
 int Trie::size()const{
 	return n;
-}i
+}
