@@ -13,17 +13,7 @@ Implementación de un árbol trie en C++.
 make
 ```
 
-## Ejecutar
-
-```sh
-./main
-```
-
-O compilar y ejecutar en un paso:
-
-```sh
-make run
-```
+Genera los ejecutables `test_trie` y `bench_trie`.
 
 ## Tests
 

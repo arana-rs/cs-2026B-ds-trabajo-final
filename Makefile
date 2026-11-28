@@ -2,8 +2,8 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Wpedantic -g -O0 -Ilib
 BENCHFLAGS = -std=c++17 -Wall -Wextra -Wpedantic -O2 -Ilib
 
-.PHONY: all run test bench clean
-all: main test_trie bench_trie
+.PHONY: all test bench clean
+all: test_trie bench_trie
 
 test_trie: lib/trie.cpp lib/trie.hpp tests/test_trie.cpp tests/common_tests.hpp
 	$(CXX) $(CXXFLAGS) lib/trie.cpp tests/test_trie.cpp -o $@
@@ -18,4 +18,4 @@ bench: bench_trie
 	./bench_trie
 
 clean:
-	rm -f main test_trie bench_trie
+	rm -f test_trie bench_trie
