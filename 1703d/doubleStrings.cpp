@@ -16,14 +16,18 @@ int main(){
 		}
 		Trie t;
 		for(int j = 0; j < n; j++){
-			for(int k = 0; k < n; k++){
-				t.insert(strings[j] + strings[k]);
-			}
+			t.insert(strings[j]);
 		}
 		string res = "";
 		for(int j = 0; j < n; j++){
-			if(t.contains(strings[j])) res += "1";
-			else res += "0";
+			char ok = '0';
+			for(string &p : t.allPrefixOf(strings[j])){
+				if(p.size() < strings[j].size() && t.contains(strings[j].substr(p.size()))){
+					ok = '1';
+					break;
+				}
+			}
+			res += ok;
 		}
 		results.push_back(res);
 	}
