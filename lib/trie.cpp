@@ -15,8 +15,10 @@ void Trie::insert(const string &key) {
     }
     v = t[v].next[c];
   }
-  t[v].output = true;
-  n++;
+  if (!t[v].output) {
+    t[v].output = true;
+    n++;
+  }
 }
 bool Trie::contains(const string &key) const {
   int v = 0;

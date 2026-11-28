@@ -31,6 +31,10 @@ template <class T> void common_tests() {
   check(trie.contains("hol") == 0, "Un prefijo no es una clave guardada");
   check(trie.contains("holaa") == 0, "Clave no existente");
 
+  trie.insert("hola");
+  check(trie.size() == 1, "Insertar una clave repetida no cambia el tamaño");
+  check(trie.t.size() == 5, "Insertar una clave repetida no crea nodos");
+
   trie.remove("hola");
   check(trie.isEmpty() == true, "Trie vacio despues de eliminacion");
   check(trie.size() == 0, "Trie posee 0 claves");
