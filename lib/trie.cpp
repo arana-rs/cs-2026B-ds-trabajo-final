@@ -55,4 +55,36 @@ void Trie::remove(const string &key) {
     n--;
   }
 }
+
+vector<string> Trie::keys() const { return keysWithPrefix(""); }
+
+void Trie::collect(int v, string &pre, vector<string> &res) const {
+  if (t[v].output)
+    res.push_back(pre);
+
+  for (int c = 0; c < K; c++) {
+    if (t[v].next[c] != -1) {
+      pre.push_back(char('a' + c));
+      collect(t[v].next[c], pre, res);
+      pre.pop_back();
+    }
+  }
+}
+
+vector<string> Trie::keysWithPrefix(const string &pre) const {
+  vector<string> res = {};
+
+  int v = 0;
+  for (char ch : pre) {
+    int pos = ch - 'a';
+    if (t[v].next[pos] == -1)
+      return res;
+    v = t[v].next[pos];
+  }
+
+  string cur = pre;
+  collect(v, cur, res);
+  return res;
+}
+
 int Trie::size() const { return n; }

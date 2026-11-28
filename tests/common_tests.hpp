@@ -2,6 +2,8 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
 inline void check(bool condition, const char *message) {
@@ -52,6 +54,20 @@ template <class T> void common_tests() {
   check(trie.contains("universalidades") == 0, "Clave no existente");
   check(trie.contains("univers") == 0, "Clave no existente");
   check(trie.contains("uni") == 0, "Clave no existente");
+  check(trie.keysWithPrefix("univers") ==
+            vector<string>{"universal", "universalidad", "universidad",
+                           "universidades", "universo"},
+        "Devuelve las 5 claves ordenadas");
+  check(trie.keysWithPrefix("universa") ==
+            vector<string>{"universal", "universalidad"},
+        "Devuelve universal y universalidad");
+  check(trie.keysWithPrefix("agu") == vector<string>{"agua"}, "Devuelve agua");
+  check(trie.keysWithPrefix("xyz").empty(),
+        "Prefijo inexistente devuelve vacio");
+  check(trie.keysWithPrefix("") ==
+            vector<string>{"agua", "oso", "universal", "universalidad",
+                           "universidad", "universidades", "universo"},
+        "Devuelve todas las claves ordenadas");
 
   trie.remove("hola");
   check(trie.size() == 7, "Trie posee 7 claves");
@@ -61,6 +77,7 @@ template <class T> void common_tests() {
 
   trie.remove("agua");
   check(trie.size() == 6, "Trie posee 6 claves");
+  check(trie.keysWithPrefix("agu").empty(), "No devuelve claves eliminadas");
 
   trie.remove("univers");
   check(trie.size() == 6, "Trie posee 6 claves");
@@ -91,6 +108,8 @@ template <class T> void common_tests() {
   trie.remove("oso");
   check(trie.isEmpty() == true, "Trie vacio despues de eliminacion");
   check(trie.size() == 0, "Trie posee 0 claves");
+  check(trie.keysWithPrefix("").empty(),
+        "Un trie vacio devuelve un vector de prefix vacio");
 
   cout << "Pruebas comunes superadas\n";
 }

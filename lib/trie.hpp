@@ -15,6 +15,7 @@ struct Vertex {
 class Trie {
 private:
   int n;
+  void collect(int v, string &pre, vector<string> &res) const;
 
 public:
   vector<Vertex> t;
