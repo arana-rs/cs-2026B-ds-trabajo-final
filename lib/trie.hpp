@@ -17,6 +17,9 @@ private:
   int n;
   void collect(int v, string &pre, vector<string> &res) const;
 
+  void collect(int v, string &pre, const string &pat,
+               vector<string> &res) const;
+
 public:
   vector<Vertex> t;
 

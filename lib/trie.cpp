@@ -87,4 +87,37 @@ vector<string> Trie::keysWithPrefix(const string &pre) const {
   return res;
 }
 
+void Trie::collect(int v, string &pre, const string &pat,
+                   vector<string> &res) const {
+  size_t d = pre.size();
+
+  // CASO cerrado digo base
+  if (v == -1)
+    return;
+
+  if (d == pat.size() && t[v].output) // Profunidad y nodo terminal deseados
+    res.push_back(pre);
+
+  if (d == pat.size())
+    return;
+
+  char next = pat[d];
+  for (int c = 0; c < K; c++) {
+    char ch = char('a' + c);
+    if (next == '.' || next == ch) {
+      pre.push_back(ch);
+      collect(t[v].next[c], pre, pat, res);
+      pre.pop_back();
+    }
+  }
+}
+
+vector<string> Trie::keysThatMatch(const string &pat) const {
+  vector<string> res;
+
+  string pre = "";
+  collect(0, pre, pat, res);
+  return res;
+}
+
 int Trie::size() const { return n; }

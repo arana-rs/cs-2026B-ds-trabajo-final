@@ -43,6 +43,17 @@ template <class T> void common_tests() {
   trie.insert("universalidad");
   trie.insert("agua");
   trie.insert("oso");
+
+  check(trie.keysThatMatch("...") == vector<string>{"oso"},
+        "Longitud 3 comodines devuelve oso");
+  check(trie.keysThatMatch("a..a") == vector<string>{"agua"},
+        "a..a devuelve agua");
+  check(trie.keysThatMatch("univers......") ==
+            vector<string>{"universalidad", "universidades"},
+        "Comodin de 13 devuelve ambas ordenadas");
+  check(trie.keysThatMatch(".....").empty(),
+        "Math sin coincidencias de 5 comodines devuelve vacio");
+
   check(trie.isEmpty() == false, "Trie ya no esta vacio");
   check(trie.size() == 7, "Trie posee 7 claves");
   check(trie.contains("agua") == 1, "La clave fue guardada");
@@ -64,9 +75,7 @@ template <class T> void common_tests() {
   check(trie.keysWithPrefix("agu") == vector<string>{"agua"}, "Devuelve agua");
   check(trie.keysWithPrefix("xyz").empty(),
         "Prefijo inexistente devuelve vacio");
-  check(trie.keysWithPrefix("") ==
-            vector<string>{"agua", "oso", "universal", "universalidad",
-                           "universidad", "universidades", "universo"},
+  check(trie.keysWithPrefix("") == trie.keys(),
         "Devuelve todas las claves ordenadas");
 
   trie.remove("hola");
@@ -78,6 +87,10 @@ template <class T> void common_tests() {
   trie.remove("agua");
   check(trie.size() == 6, "Trie posee 6 claves");
   check(trie.keysWithPrefix("agu").empty(), "No devuelve claves eliminadas");
+
+  
+  check(trie.keysThatMatch("a..a").empty(),
+        "a..a ya no devuelve agua ya que se borro");
 
   trie.remove("univers");
   check(trie.size() == 6, "Trie posee 6 claves");
