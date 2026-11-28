@@ -1,6 +1,9 @@
 # Trie
 
-Implementación de un árbol trie en C++.
+Implementación de un árbol trie en C++, en dos versiones con la misma interfaz:
+
+- `lib/trie.*`: nodos en un `vector<Vertex>` con índices; borrado perezoso.
+- `lib/trie_ptr.*`: nodos con punteros (`Node* next[26]`); borrado ansioso que libera los nodos con `delete`.
 
 ## Requisitos
 
@@ -13,7 +16,7 @@ Implementación de un árbol trie en C++.
 make
 ```
 
-Genera los ejecutables `test_trie` y `bench_trie`.
+Genera los ejecutables de pruebas y benchmarks de ambas versiones.
 
 ## Tests
 
@@ -21,13 +24,23 @@ Genera los ejecutables `test_trie` y `bench_trie`.
 make test
 ```
 
+Ejecuta las pruebas comunes en ambas versiones y las de borrado ansioso de `TriePtr`.
+
+## Memoria
+
+```sh
+make asan
+```
+
+Compila las pruebas con AddressSanitizer/LeakSanitizer; falla si hay fugas o accesos inválidos.
+
 ## Benchmarks
 
 ```sh
 make bench
 ```
 
-Compara el trie con `std::set<string>` en `insert`, `contains` (claves presentes y ausentes), `keysWithPrefix` y memoria, con n = 10³, 10⁴ y 10⁵ palabras aleatorias de longitud 10 (semilla fija 42, mejor de 5 corridas, `-O2`). Son los resultados que aparecen en las diapositivas.
+Compara cada versión del trie con `std::set<string>` en `insert`, `contains` (claves presentes y ausentes), `keysWithPrefix`, memoria y memoria tras borrar todas las claves, con n = 10³, 10⁴ y 10⁵ palabras aleatorias de longitud 10 (semilla fija 42, mejor de 5 corridas, `-O2`). Son los resultados que aparecen en las diapositivas.
 
 ## Problema de Codeforces
 

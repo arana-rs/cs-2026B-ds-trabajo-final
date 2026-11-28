@@ -30,6 +30,7 @@ public:
   void remove(const string &);
   bool isEmpty() const;
   int size() const;
+  int nodes() const;
 
   string longestPrefixOf(const string &) const;
   vector<string> keysWithPrefix(const string &) const;

@@ -141,3 +141,5 @@ vector<string> Trie::allPrefixOf(const string &str) const {
 }
 
 int Trie::size() const { return n; }
+
+int Trie::nodes() const { return t.size(); }

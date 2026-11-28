@@ -1,4 +1,8 @@
 test_trie
 bench_trie
+test_trie_ptr
+bench_trie_ptr
+asan_trie
+asan_trie_ptr
 tmp/
 cf_1703d

@@ -46,6 +46,7 @@ struct SetDict {
 
     void insert(const string& key) { s.insert(key); }
     bool contains(const string& key) const { return s.count(key); }
+    void remove(const string& key) { s.erase(key); }
 
     vector<string> keysWithPrefix(const string& pre) const {
         vector<string> res;
@@ -57,7 +58,7 @@ struct SetDict {
 
 struct BenchResult {
     double insert_ms, hit_ms, miss_ms, prefix_ms;
-    double mb;
+    double mb, mb_after;
     long long found;
 };
 
@@ -94,6 +95,11 @@ BenchResult run_benchmark(const vector<string>& words, const vector<string>& mis
             pre += d.keysWithPrefix(p).size();
     });
 
+    // Memoria que sigue reservada despues de borrar todas las claves
+    for (auto& w : words)
+        d.remove(w);
+    r.mb_after = (heap_bytes() - before) / 1e6;
+
     // Se usa para comprobar que ambas estructuras dan el mismo resultado
     r.found = hits * 1000000LL + fake * 1000LL + pre;
     return r;
@@ -120,5 +126,6 @@ void common_benchmarks() {
         cout << n << "\tcontains (miss)\t" << a.miss_ms << '\t' << b.miss_ms << '\n';
         cout << n << "\tkeysWithPrefix\t" << a.prefix_ms << '\t' << b.prefix_ms << '\n';
         cout << n << "\tmemoria (MB)\t" << a.mb << '\t' << b.mb << '\n';
+        cout << n << "\tmemoria tras borrar todo (MB)\t" << a.mb_after << '\t' << b.mb_after << '\n';
     }
 }

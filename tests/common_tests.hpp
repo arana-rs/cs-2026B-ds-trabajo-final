@@ -15,10 +15,10 @@ inline void check(bool condition, const char *message) {
 
 template <class T> void common_tests() {
   T trie;
-  check(trie.t.size() == 1, "Trie comienza solo con la raiz");
+  check(trie.nodes() == 1, "Trie comienza solo con la raiz");
   check(trie.isEmpty() == true, "Trie comienza vacío");
   check(trie.size() == 0, "Trie comienza con 0 claves");
-  check(!trie.t[0].output, "La raiz no es fin de palabra");
+  check(!trie.contains(""), "La raiz no es fin de palabra");
 
   trie.insert("hola");
 
@@ -26,14 +26,14 @@ template <class T> void common_tests() {
 
   check(trie.isEmpty() == false, "Trie ya no esta vacio");
   check(trie.size() == 1, "Trie posee 1 claves");
-  check(trie.t.size() == 5, "El árbol posee 5 nodos");
+  check(trie.nodes() == 5, "El árbol posee 5 nodos");
   check(trie.contains("hola") == 1, "La clave fue guardada");
   check(trie.contains("hol") == 0, "Un prefijo no es una clave guardada");
   check(trie.contains("holaa") == 0, "Clave no existente");
 
   trie.insert("hola");
   check(trie.size() == 1, "Insertar una clave repetida no cambia el tamaño");
-  check(trie.t.size() == 5, "Insertar una clave repetida no crea nodos");
+  check(trie.nodes() == 5, "Insertar una clave repetida no crea nodos");
 
   trie.remove("hola");
   check(trie.isEmpty() == true, "Trie vacio despues de eliminacion");
