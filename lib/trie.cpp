@@ -16,25 +16,50 @@ void Trie::insert(const string& key){
 			t.emplace_back();
 		}
 		v = t[v].next[c];
-	}
+	}&
 	t[v].output = true;
 	n++;
 }
-
+vector<string> Trie::keys() const {
+	return keysWithPrefix("");
+}
 bool Trie::contains(const string& key)const{
  int v = 0;
  for(char c : key){
     int pos = c - 'a';
     if(this->t[v].next[pos] == -1) return false;
     v = t[v].next[pos];   
-  }
+  
   return t[v].output;
 }
 
 bool Trie::isEmpty()const{
 	return n == 0;;
 }
+string longestPrefixOf(const string& s) const{
 
+}
+vector<string> Trie::keysWithPrefix(const string& s) const {
+    int v = 0;
+
+}
+
+vector<string> Trie::keysThatMatch(const string& s) const {
+    vector<string> res;
+
+}
+
+void Trie::remove(const string& key){
+	int v = 0;
+	for(char ch : key){
+	 int c = ch - 'a';
+	 if(t[v].next[c] == -1) return;
+	 v = t[v].next[c];
+	}
+	if(t[v].output)
+	 t[v].output = false;
+	 n--;
+}
 int Trie::size()const{
 	return n;
-}
+}i
