@@ -30,6 +30,7 @@ bool Trie::contains(const string &key) const {
 }
 
 bool Trie::isEmpty() const { return n == 0; }
+
 string Trie::longestPrefixOf(const string &s) const {
   int v = 0, len = 0;
   for (int i = 0; i < (int)s.size(); i++) {
@@ -42,6 +43,7 @@ string Trie::longestPrefixOf(const string &s) const {
   }
   return s.substr(0, len);
 }
+
 void Trie::remove(const string &key) {
   int v = 0;
   for (char ch : key) {
@@ -117,6 +119,22 @@ vector<string> Trie::keysThatMatch(const string &pat) const {
 
   string pre = "";
   collect(0, pre, pat, res);
+  return res;
+}
+
+vector<string> Trie::allPrefixOf(const string &str) const {
+  vector<string> res;
+  int v = 0;
+
+  for (int i = 0; i < (int)str.size(); i++) {
+    int pos = str[i] - 'a';
+    if (t[v].next[pos] == -1)
+      break;
+    v = t[v].next[pos];
+    if (t[v].output)
+      res.push_back(str.substr(0, i + 1));
+  }
+
   return res;
 }
 

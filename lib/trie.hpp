@@ -35,4 +35,6 @@ public:
   vector<string> keysWithPrefix(const string &) const;
   vector<string> keysThatMatch(const string &) const;
   vector<string> keys() const;
+
+  vector<string> allPrefixOf(const string &) const;
 };

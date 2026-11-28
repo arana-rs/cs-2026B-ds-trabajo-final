@@ -44,6 +44,15 @@ template <class T> void common_tests() {
   trie.insert("agua");
   trie.insert("oso");
 
+  check(trie.allPrefixOf("universalidadx") ==
+            vector<string>{"universal", "universalidad"},
+        "Prefijos validos en orden");
+  check(trie.allPrefixOf("universidades") ==
+            vector<string>{"universidad", "universidades"},
+        "El prefijo de la clave exacta se incluye");
+  check(trie.allPrefixOf("xyz").empty(),
+        "Prefijo sin coincidencias devuelve vacio");
+
   check(trie.keysThatMatch("...") == vector<string>{"oso"},
         "Longitud 3 comodines devuelve oso");
   check(trie.keysThatMatch("a..a") == vector<string>{"agua"},
@@ -88,7 +97,6 @@ template <class T> void common_tests() {
   check(trie.size() == 6, "Trie posee 6 claves");
   check(trie.keysWithPrefix("agu").empty(), "No devuelve claves eliminadas");
 
-  
   check(trie.keysThatMatch("a..a").empty(),
         "a..a ya no devuelve agua ya que se borro");
 
